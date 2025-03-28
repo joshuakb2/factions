@@ -318,8 +318,8 @@ public class ClaimCommand implements Command {
                 }
             }
         } else {
-            if (claim.accessLevel.ordinal() <= user.rank.ordinal()) {
-                new Message("Cannot decrease access level from higher then your rank")
+            if (claim.accessLevel.ordinal() < user.rank.ordinal()) {
+                new Message("Cannot decrease access level from higher than your rank")
                         .fail()
                         .send(player, false);
                 return 0;
