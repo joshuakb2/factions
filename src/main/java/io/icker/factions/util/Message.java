@@ -53,12 +53,12 @@ public class Message {
         text.styled(
                 s ->
                         s.withHoverEvent(
-                                new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.of(message))));
+                                new HoverEvent.ShowText(Text.of(message))));
         return this;
     }
 
     public Message click(String message) {
-        text.styled(s -> s.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, message)));
+        text.styled(s -> s.withClickEvent(new ClickEvent.RunCommand(message)));
         return this;
     }
 
