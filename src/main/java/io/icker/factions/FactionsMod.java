@@ -57,12 +57,18 @@ public class FactionsMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("Initialized Factions Mod");
+        LOGGER.info("Initializing Factions Mod");
 
         WorldUtils.register();
 
         dynmap = FabricLoader.getInstance().isModLoaded("dynmap") ? new DynmapWrapper() : null;
-        bluemap = FabricLoader.getInstance().isModLoaded("bluemap") ? new BlueMapWrapper() : null;
+        if (FabricLoader.getInstance().isModLoaded("bluemap")) {
+            FactionsMod.LOGGER.info("BlueMap is loaded, creating BlueMapWrapper");
+            bluemap = new BlueMapWrapper();
+        }
+        else {
+            FactionsMod.LOGGER.info("BlueMap is not loaded");
+        }
         squaremap =
                 FabricLoader.getInstance().isModLoaded("squaremap") ? new SquareMapWrapper() : null;
 

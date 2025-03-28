@@ -30,6 +30,7 @@ public class BlueMapWrapper {
     public BlueMapWrapper() {
         BlueMapAPI.onEnable(
                 (api) -> {
+                    FactionsMod.LOGGER.info("BlueMap enabled");
                     this.api = api;
                     generateMarkers();
                 });
@@ -54,9 +55,11 @@ public class BlueMapWrapper {
     }
 
     private void generateMarkers() {
+        FactionsMod.LOGGER.info("Generating BlueMap markers");
+
         if (!WorldUtils.isReady()) {
             loadWhenReady = true;
-            FactionsMod.LOGGER.info("Server hasn't loaded, postponing dynmap marker loading");
+            FactionsMod.LOGGER.info("Server hasn't loaded, postponing BlueMap marker loading");
             return;
         }
 
@@ -96,8 +99,8 @@ public class BlueMapWrapper {
                                 Shape.createRect(
                                         pos.getStartX(),
                                         pos.getStartZ(),
-                                        pos.getEndX(),
-                                        pos.getEndZ()),
+                                        pos.getEndX() + 0.99,
+                                        pos.getEndZ() + 0.99),
                                 -64,
                                 320)
                         .fillColor(new Color(faction.getColor().getColorValue() | 0x40000000))
